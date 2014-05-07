@@ -1,0 +1,316 @@
+// Vars
+$section_width: 1200px;
+$article_width: 640px;
+$header_height: 345px;
+$header_height_mobile: 245px;
+$unit: 50px;
+$border_width: 3px;
+
+$mobile: 640px;
+
+@font-face {
+	font-family: 'casataller';
+	src: url("../fonts/icon_taller.ttf") format("truetype");
+	src: url("../fonts/icon_taller.otf") format("opentype");
+	src: url("../fonts/icon_taller.woff") format("woff");
+}
+
+
+body {
+	font-family: 'Roboto', 'Verdana';
+	font-size: 14pt;
+	font-weight: 300;
+}
+
+nav ul {
+	list-style: none;
+	text-transform: uppercase;
+	padding-left: 0;
+	margin: 0;
+	font-family: 'Roboto Condensed';
+}
+
+.colophon {
+	font-family: 'Roboto Condensed';
+	font-weight: bold;
+	text-decoration: none;
+}
+
+em.important {
+	font-style: normal;
+	text-transform: uppercase;
+	font-size: 14pt;
+}
+.normaltext {
+	text-transform: none;
+}
+
+/* General layout */
+nav#main-menu,
+header#main-header,
+section#main,
+footer#main-footer {
+	margin-left: $unit;
+	margin-right: $unit;
+}
+
+.wrapper {
+	position: relative;
+	max-width: $section_width;
+	width: 100%;
+	margin: 0 auto;
+}
+
+/* Articles */
+#main .wrapper {
+	background-color: black;
+	color: white;
+	padding-bottom: 1rem;
+
+	article {
+		max-width: $article_width;
+		margin: 0 auto 6rem;
+
+		header {
+			text-align: center;
+			text-transform: uppercase;
+			margin-bottom: 2rem;
+		}
+		h1 {
+			margin: 0 0 1.5rem 0;
+			font-family: 'Roboto Condensed';
+		}
+		h2 {
+			font-weight: bold;
+			margin: 2rem 0 0.5rem 0;
+		}
+		h2 + p, h3 + p, h2 + h3 {
+			margin-top: 0;
+		}
+	}
+	a {
+		color: white;
+	}
+}
+
+#main .wrapper article {
+	padding: 0 $unit;
+}
+#main-menu .wrapper {
+	height: $unit;
+}
+.menu-button {
+	display: none;
+	text-transform: uppercase;
+	color: black;
+  padding: 1rem 1rem 0 0;
+  text-align: right;
+}
+
+/* header */
+#main-header {
+	height: $header_height;
+	a {
+		color: black;
+	}
+}
+
+.header-bg {
+	width: 0;
+	height: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+
+.header-bg {
+	border-bottom: $header_height solid black;
+	border-left: $section_width/2 solid transparent;
+	border-right: $section_width/2 solid transparent;
+}
+
+
+/* menus */
+#main-menu {
+	ul {
+		font-weight: bold;
+		font-size: 18pt;
+		text-align: right;
+		position: absolute;
+		right: 0;
+		top: $unit;
+		z-index: 1;
+		li {
+			padding: 6px 0 6px 6px;
+		}
+		li:first-child {
+			padding-top: 0;
+		}
+		a {
+			padding: 4px 0 4px 8px;
+		}
+		a:hover {
+			color: white;
+			background-color: black;
+		}
+	}
+}
+
+.casa-link {
+	font-family: 'casataller';
+	text-decoration: underline;
+	font-size: 18pt;
+}
+#footer-menu {
+	li {
+		display: inline;
+		margin-left: 0.5rem;
+	}
+	li:before {
+		margin-right: 0.5rem;
+		content: '|';
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+}
+
+#main-menu ul a,
+#main-menu-mobile ul a,
+#footer-menu a {
+	color: black;
+	text-decoration: none;
+}
+
+/* footer */
+#main-footer {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	.wrapper {
+		text-align: right;
+	}
+	a {
+		color: black;
+	}
+}
+.tag-line,
+#footer-menu {
+	display: inline-block;
+}
+
+.sep-white {
+	height: 5px;
+	background-image: url("../images/white_line.png");
+	background-repeat: repeat-x;
+	margin: 0 auto;
+}
+.sep-black {
+	height: 5px;
+	background-image: url("../images/black_line.png");
+	background-repeat: repeat-x;
+	width: 50px;
+	float: right;
+}
+.header-sep {
+	height: 5px;
+	background-image: url("../images/black_line.png");
+	background-repeat: repeat-x;
+	width: 200px;
+	margin: 1rem 0;
+}
+
+.post-date {
+		text-transform: capitalize;
+}
+.contact-link {
+	font-size: 150%;
+	text-align: center;
+}
+.taller-photos {
+	text-align: center;
+	ul {
+		padding: 0;
+	  list-style: none;
+	  li {
+	  	float: left;
+	  	width: 25%;
+	  }
+	}
+	a {
+		display: block;
+		padding: 4px;
+	}
+	img {
+		width: 100%;
+	}
+}
+#logo {
+	height: 92px;
+}
+
+/* Mobile and small */
+@media all and (max-width: $mobile), all and (max-device-width: $mobile) {
+	#main-header {
+		height: $header_height_mobile;
+	}
+
+	nav#main-menu,
+	header#main-header,
+	section#main,
+	footer#main-footer {
+		margin-right: 0;
+		margin-left: $unit/2;
+	}
+
+	/* header bg */
+	.header-bg {
+		border-top: $header_height_mobile/2 solid transparent;
+		border-bottom: $header_height_mobile/2+0.5 solid black;
+		border-left: $mobile/2 solid transparent;
+		border-right: $mobile/2 solid black;
+	}
+
+	/* footer */
+	#footer-menu li:first-child:before {
+		margin-right: 0.5rem;
+		content: '';
+	}
+	.tag-line,
+	#footer-menu {
+		margin-right: 0.5rem;
+	}
+
+	/* layout */
+	#main .wrapper article {
+		padding: 0 $unit/2;
+	}
+	#main-menu .wrapper {
+	    height: auto;
+	}
+	.menu-button {
+		display: block;
+	}
+	#main-menu {
+		ul {
+			display: none;
+			position: static;
+			margin: 1rem 1rem $unit 0;
+			text-align: center;
+			li {
+				padding: 6px 0;
+			}
+			a {
+				padding: 4px 0;
+			}
+			.sep-black {
+				margin: 0 auto;
+				float: none;
+			}
+		}
+	}
+
+	.taller-photos ul li {
+  	width: 50%;
+  }
+}

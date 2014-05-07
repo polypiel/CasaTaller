@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<article id="content">
+	<header>
+		<h1>{{ page.title }}{% if page.ed && page.ed != blank %}<span class="normaltext"> ({{ page.ed }} ed)</span>{% endif %}</h1>
+		<div class="sep-white"></div>
+	</header>
+	<div>
+		{{ content }}
+	</div>
+</article>

@@ -1,0 +1,78 @@
+---
+layout: default
+---
+<div id="content">
+	<article id="art_proximos">
+		<header>
+			<h1>Próximos talleres</h1>
+			<div class="sep-white"></div>
+		</header>
+		<div>
+			<p>Lo sentimos, pero actualmente no hay programado ningún taller. Síguenos en <a href="{{site.data.global.facebook}}" target="_blank" title="Página en Facebook">Facebook</a> para recibir noticias sobre futuros talleres.</p>
+			{% for post in site.posts %}
+			{% if post.date >= site.time %}
+			<p>
+				<a href="{{ post.url }}" data-nav>
+					<strong><em class="important">{{ post.title }}</em>{% if post.ed && post.ed != blank %} ({{ post.ed }} ed){% endif %}</strong>.
+				</a>
+				<br/>
+				<span class="post-date">{{ post.date | localize: "%a %-d %b %Y"}}</span>, {{ post.place }}.
+			</p>
+			{% endif %}
+  		{% endfor %}
+		</div>
+	</article>
+
+	<article id="art_pasados">
+		<header>
+			<h1>Talleres anteriores</h1>
+			<div class="sep-white"></div>
+		</header>
+		<div>
+			{% for post in site.posts %}
+			{% if post.date < site.time %}
+			<p>
+				<a href="{{ post.url }}" data-nav>
+					<strong><em class="important">{{ post.title }}</em>{% if post.ed && post.ed != blank %} ({{ post.ed }} ed){% endif %}</strong>.
+				</a>
+				<br/>
+				<span class="post-date">{{ post.date | localize: "%a %-d %b %Y"}}</span>, {{ post.place }}.
+			</p>
+			{% endif %}
+  		{% endfor %}
+		</div>
+	</article>
+
+	<article id="art_filosofia">
+		<header>
+			<h1>Nuestra filosofía</h1>
+			<div class="sep-white"></div>
+		</header>
+		<div>
+			<p>Creemos que no sirve de nada aprender cosas que no se puedan poner en práctica o que necesiten un complejo y caro equipo para llevarlas a cabo.</p>
+			<p>Nuestros talleres se basan en “entender” el proceso, y en aplicar ese conocimiento a útiles cercanos y fáciles de conseguir.</p>
+			<p>Nos orgullecemos en decir que tenemos una filosofía <em>lowcost</em> de andar por casa, pero que no está reñida con la calidad del resultado final.</p>
+		</div>
+	</article>
+
+	<article id="art_profes">
+		<header>
+			<h1>Profesorado</h1>
+			<div class="sep-white"></div>
+		</header>
+		<div>
+			{% include damian.html %}
+		</div>
+	</article>
+
+	<article id="art_contact">
+		<header>
+			<h1>Contacto</h1>
+			<div class="sep-white"></div>
+		</header>
+		<div>
+			<p>Si tienes alguna duda o quieres más información sobre los talleres contactanos en:</p>
+			<p class="contact-link"><a href="mailto:{{site.data.global.email}}">{{site.data.global.email}}</a></p>
+		</div>
+	</article>
+</div>
