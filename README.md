@@ -1,4 +1,6 @@
 CasaTaller
 ==========
 
-Casa Taller web source. Casa Taller are bookbinding and other crafts workshops.
+Casa Taller web source. Casa Taller is a series of workshops about bookbinding and other crafts.
+
+http://casataller.info
