@@ -162,12 +162,26 @@ var urlmodule = (function () {
 
     /** Compares this Url to another ignoring the ref */
     this.equals = function (other) {
+      // helper function to count the num of properties of an object
+      function len(obj) {
+        if(typeof obj === "undefined") {
+          return 0;
+        }
+        return Object.getOwnPropertyNames(obj).length;
+      }
+
       // compare page
       if (this.page !== other.page) {
         return false;
       }
+
+      // compare id
+      if((this.hasRef() || other.hasRef()) && this.ref !== other.ref) {
+        return false;
+      }
+
       // Compare params
-      if (this.params.length !== other.params.length) {
+      if (len(this.params) !== len(other.params)) {
         return false;
       }
       for (var param in this.params) {
@@ -181,7 +195,15 @@ var urlmodule = (function () {
 
     /** Returns if the given param exists */
     this.hasParam = function(param) {
-      return this.params && this.params[param];
+      return this.hasParams() && this.params[param];
+    };
+
+    this.hasParams = function() {
+      return typeof this.params !== "undefined" && Object.keys(this.params).length > 0;
+    };
+
+    this.hasRef = function() {
+      return typeof this.ref !== "undefined" && this.ref.length; // TODO
     };
   }
 
@@ -206,7 +228,7 @@ var urlmodule = (function () {
   return {
     /** Returns the current url */
     currentUrl: function () {
-      return str_2_url2(window.location.pathname.substr(1), window.location.search.substr(1));
+      return str_2_url2(window.location.pathname, window.location.search.substr(1));
     },
     /** Converts a string to url */
     str_2_url: function (str) {
