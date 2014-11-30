@@ -35,5 +35,7 @@ var CasaTaller = {
 	postNavigate: function (event, url) {
 		var self = CasaTaller;
 		self.config.container.slideDown('normal');
+		// Magnific Popup
+		$('.taller-photos').magnificPopup({ delegate: 'a', type: 'image', gallery:{enabled:true} });
 	}
 };
