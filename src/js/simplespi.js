@@ -51,13 +51,13 @@
       $('a[data-' + self.NAV_TAG + ']').each(function (index, elem) {
         var jelem = $(elem);
         if (jelem.attr('href')) {
-          var new_url = urlmodule.str_2_url(jelem.attr('href'));
+          var newUrl = urlmodule.str_2_url(jelem.attr('href'));
 
           // Checks the event is not registered
           jelem.off('click');
           // Binds click event
           jelem.on('click', null, {
-            "url": new_url
+            "url": newUrl
           }, self.navigateEvent);
         }
       });
@@ -93,7 +93,7 @@
 
       var navDef = new $.Deferred();
       navDef.done(function () {
-        self.navigate2(url);
+        self.doNavigation(url);
       });
       if (self.config.beforeNavigate) {
         $(document).trigger(self.BEFORE_NAVIGATE_EVENT, [navDef, url]);
@@ -106,7 +106,7 @@
      * Perfoms the real navigation
      * @param url page to load
      */
-    navigate2: function (url) {
+    doNavigation: function (url) {
       var self = SimpleSPI;
 
       self.config.container.load(url.page + ' ' + self.config.toLoad, function () {
@@ -118,10 +118,13 @@
         $(document).trigger(self.AFTER_NAVIGATE_EVENT, [url]);
         self.parsePage();
 
-        // updates browser url
-        var url_str = url.toString();
-        history.pushState(url_str, "", url_str);
+        self.updateNavigationBar(url);
       });
+    },
+
+    updateNavigationBar: function (newUrl) {
+      var urlStr = newUrl.toString();
+      history.pushState(urlStr, "", urlStr);
     }
   };
 
@@ -207,6 +210,7 @@ var urlmodule = (function () {
     };
   }
 
+  // TODO add '/' to the end of the page
   function str_2_url3(page, ref, params) {
     var params_map = {};
     var params_a = params ? params.split('&') : [];
@@ -216,7 +220,14 @@ var urlmodule = (function () {
         params_map[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
       }
     }
-    return new Url(page, ref, params_map);
+    return new Url(removeTailingBar(page), ref, params_map);
+  }
+
+  function removeTailingBar(page) {
+    if(page.indexOf('/', page.length - 1) !== -1) {
+      return page.substr(0, page.length - 1);
+    }
+    return page;
   }
 
   function str_2_url2(path, search) {
